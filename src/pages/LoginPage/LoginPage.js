@@ -19,7 +19,7 @@ const LoginPage = () => {
 
   const login = () => {
     axios
-      .post("https://fathomless-headland-55323.herokuapp.com/api/login", {
+      .post("https://itransition-task4-server.herokuapp.com/api/login", {
         email: email,
         password: password,
       })

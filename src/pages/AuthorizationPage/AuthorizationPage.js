@@ -20,7 +20,7 @@ const AuthorizationPage = () => {
 
   const register = () => {
     axios
-      .post("https://fathomless-headland-55323.herokuapp.com/api/register", {
+      .post("https://itransition-task4-server.herokuapp.com/api/register", {
         email: email,
         password: password,
         name: userName,

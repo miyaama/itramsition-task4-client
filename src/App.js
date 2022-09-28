@@ -17,7 +17,7 @@ function App() {
   useEffect(() => {
     const fetchUserStatusById = async (id) => {
       const result = await axios.get(
-        `https://fathomless-headland-55323.herokuapp.com/api/get/${id}`
+        `https://itransition-task4-server.herokuapp.com/api/get/${id}`
       );
       setUserStatus(result.data.status);
     };

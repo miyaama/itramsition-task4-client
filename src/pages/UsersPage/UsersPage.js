@@ -40,7 +40,7 @@ const UsersPage = () => {
 
   const loadUsers = async () => {
     const response = await axios.get(
-      "https://fathomless-headland-55323.herokuapp.com/api/get"
+      "https://itransition-task4-server.herokuapp.com/api/get"
     );
     setUsers(response.data);
   };
@@ -66,7 +66,7 @@ const UsersPage = () => {
   const deleteUser = (id) => {
     id.forEach((element) => {
       axios.delete(
-        `https://fathomless-headland-55323.herokuapp.com/api/remove/${element}`
+        `https://itransition-task4-server.herokuapp.com/api/remove/${element}`
       );
     });
     window.location.reload();
@@ -75,7 +75,7 @@ const UsersPage = () => {
   const unblockedUser = (id) => {
     id.forEach((element) => {
       axios.put(
-        `https://fathomless-headland-55323.herokuapp.com/api/update/${element}`,
+        `https://itransition-task4-server.herokuapp.com/api/update/${element}`,
         {
           status: "active",
         }
@@ -87,7 +87,7 @@ const UsersPage = () => {
   const blockedUser = (id) => {
     id.forEach((element) => {
       axios.put(
-        `https://fathomless-headland-55323.herokuapp.com/api/update/${element}`,
+        `https://itransition-task4-server.herokuapp.com/api/update/${element}`,
         {
           status: "blocked",
         }
