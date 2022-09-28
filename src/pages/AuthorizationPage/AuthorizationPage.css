@@ -1,0 +1,16 @@
+.autorization-container {
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.authorization-form {
+  width: 300px;
+  margin: auto;
+}
+
+.authorization-form-button {
+    width: 100%;
+  }
