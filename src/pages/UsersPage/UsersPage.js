@@ -35,6 +35,10 @@ const columns = [
 
 const UsersPage = () => {
   const navigate = useNavigate();
+  const userData = JSON.parse(localStorage.getItem(IS_LOGIN_LOCAL_STORAGE));
+
+  const currentUserId = userData?.id;
+
   const [users, setUsers] = useState([]);
   const [selectedRowKeys, setSelectedRowKeys] = useState([]);
 
@@ -69,7 +73,12 @@ const UsersPage = () => {
         `https://itransition-task4-server.herokuapp.com/api/remove/${element}`
       );
     });
-    window.location.reload();
+    loadUsers();
+    id.forEach((userId) => {
+      if (userId === currentUserId) {
+        navigate("/");
+      }
+    });
   };
 
   const unblockedUser = (id) => {
@@ -93,8 +102,12 @@ const UsersPage = () => {
         }
       );
     });
-
-    window.location.reload();
+    loadUsers();
+    id.forEach((userId) => {
+      if (userId === currentUserId) {
+        navigate("/");
+      }
+    });
   };
 
   return (
