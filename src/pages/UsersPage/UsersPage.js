@@ -35,6 +35,9 @@ const columns = [
 
 const UsersPage = () => {
   const navigate = useNavigate();
+  const userData = JSON.parse(localStorage.getItem(IS_LOGIN_LOCAL_STORAGE));
+
+  const currentUserId = userData?.id;
 
   const [users, setUsers] = useState([]);
   const [selectedRowKeys, setSelectedRowKeys] = useState([]);
@@ -65,36 +68,67 @@ const UsersPage = () => {
   };
 
   const deleteUser = (id) => {
-    id.forEach((element) => {
+    let newUsers = [...users];
+
+    id.forEach((currentId) => {
       axios.delete(
-        `https://itransition-task4-server.herokuapp.com/api/remove/${element}`
+        `https://itransition-task4-server.herokuapp.com/api/remove/${currentId}`
       );
+      newUsers = newUsers.filter((user) => user.id !== currentId);
     });
-    window.location.reload();
+    setUsers(newUsers);
+    id.forEach((userId) => {
+      if (userId === currentUserId) {
+        navigate("/");
+      }
+    });
   };
 
   const unblockedUser = (id) => {
-    id.forEach((element) => {
+    let newUsers = [...users];
+
+    id.forEach((currentId) => {
+      newUsers = newUsers.map((user) => {
+        let status = user.status;
+        if (user.id === currentId) {
+          status = "active";
+        }
+        return { ...user, status };
+      });
       axios.put(
-        `https://itransition-task4-server.herokuapp.com/api/update/${element}`,
+        `https://itransition-task4-server.herokuapp.com/api/update/${currentId}`,
         {
           status: "active",
         }
       );
     });
-    window.location.reload();
+    console.log("newUsers: ", newUsers);
+    setUsers(newUsers);
   };
-
+  console.log(users);
   const blockedUser = (id) => {
-    id.forEach((element) => {
+    let newUsers = [...users];
+    id.forEach((currentId) => {
       axios.put(
-        `https://itransition-task4-server.herokuapp.com/api/update/${element}`,
+        `https://itransition-task4-server.herokuapp.com/api/update/${currentId}`,
         {
           status: "blocked",
         }
       );
+      newUsers = newUsers.map((user) => {
+        let status = user.status;
+        if (user.id === currentId) {
+          status = "blocked";
+        }
+        return { ...user, status };
+      });
     });
-    window.location.reload();
+    setUsers(newUsers);
+    id.forEach((userId) => {
+      if (userId === currentUserId) {
+        navigate("/");
+      }
+    });
   };
 
   return (
