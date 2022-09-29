@@ -27,6 +27,7 @@ function App() {
     if (id) {
       fetchUserStatusById(id);
     }
+    // eslint-disable-next-line
   }, []);
 
   useEffect(() => {
@@ -35,6 +36,7 @@ function App() {
     } else {
       navigate("/");
     }
+    // eslint-disable-next-line
   }, [userStatus]);
 
   return (
